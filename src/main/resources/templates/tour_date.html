@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>DATG Tour</title>
+
+    <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+            crossorigin="anonymous"
+    />
+
+    <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"
+    />
+    <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+
+    <link rel="stylesheet" href="/css/stylesheet.css" />
+    <link rel="icon" type="image/x-icon" href="/images/favicon.png" />
+</head>
+
+<body>
+<!-- Navbar Header -->
+<nav class="navbar sticky-top navbar-expand-sm navbar-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/"
+        ><img id="DATG-Logo" src="/images/DATG_Text_Logo.png"
+        /></a>
+
+        <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+        >
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="/music">Music</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/tour">Tour</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/contact">Contact</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" sec:authorize="isAuthenticated()" href="/profile">Profile</a>
+                </li>
+            </ul>
+
+            <!-- Filler div between Nav items -->
+            <div class="d-sm-flex" />
+            <!-- Creates line between login/signup on dropdown -->
+            <hr class="d-sm-none">
+
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="padding-right: 10px;">
+                <li class="nav-item" sec:authorize="isAnonymous()"><a class="nav-link" href="/login">Login</a></li>
+                <li class="nav-item" sec:authorize="isAnonymous()"><a class="nav-link" href="/registration">Register</a></li>
+                <li class="nav-item" sec:authorize="isAuthenticated()"><a class="nav-link" href="/">Welcome!</a></li>
+                <li class="nav-item" sec:authorize="isAuthenticated()"><a class="nav-link" href="/logout">Logout</a></li>
+                <!-- <span sec:authentication="username"></span> -->
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Form wrapper container -->
+<div class="container py-4" style="max-width: 35%">
+    <form id="tourDateForm" th:action="@{/tour_date}" th:object="${tourDate}" method="post">
+
+        <!-- City input -->
+        <div class="mb-3">
+            <label class="form-label" for="city">City</label>
+            <input
+                    class="form-control"
+                    id="city"
+                    placeholder="Enter city"
+                    th:field="*{city}"
+            />
+            <ul>
+                <li th:each="err : ${#fields.errors('city')}" th:text="${err}" class="error" />
+            </ul>
+        </div>
+
+        <!-- Venue input -->
+        <div class="mb-3">
+            <label class="form-label" for="venue">Venue</label>
+            <input
+                    class="form-control"
+                    id="venue"
+                    placeholder="Enter venue"
+                    th:field="*{venue}"
+            />
+            <ul>
+                <li th:each="err : ${#fields.errors('venue')}" th:text="${err}" class="error" />
+            </ul>
+        </div>
+
+        <!-- Date input -->
+        <div class="mb-3">
+            <label class="form-label" for="date">Date</label>
+            <input
+                    class="form-control"
+                    id="date"
+                    placeholder="Enter date"
+                    th:field="*{date}"
+            />
+            <ul>
+                <li th:each="err : ${#fields.errors('date')}" th:text="${err}" class="error" />
+            </ul>
+        </div>
+
+        <!-- Preorder input -->
+        <div class="mb-3">
+            <label class="form-label" for="preorder">Preorder</label>
+            <input
+                    class="form-control"
+                    id="preorder"
+                    placeholder="Enter Preorder"
+                    th:field="*{preorder}"
+            />
+            <ul>
+                <li th:each="err : ${#fields.errors('preorder')}" th:text="${err}" class="error" />
+            </ul>
+        </div>
+
+        <!-- Door input -->
+        <div class="mb-3">
+            <label class="form-label" for="door">Door</label>
+            <input
+                    class="form-control"
+                    id="door"
+                    placeholder="Enter door"
+                    th:field="*{door}"
+            />
+            <ul>
+                <li th:each="err : ${#fields.errors('door')}" th:text="${err}" class="error" />
+            </ul>
+        </div>
+
+        <!-- Link input -->
+        <div class="mb-3">
+            <label class="form-label" for="link">Link</label>
+            <input
+                    class="form-control"
+                    id="link"
+                    placeholder="Enter link"
+                    th:field="*{link}"
+            />
+            <ul>
+                <li th:each="err : ${#fields.errors('link')}" th:text="${err}" class="error" />
+            </ul>
+        </div>
+
+        <!-- Form submit button -->
+        <div class="d-grid">
+            <button
+                    class="btn btn-primary btn-lg"
+                    type="submit"
+            >
+                Create Date
+            </button>
+        </div>
+    </form>
+</div>
+
+
+<!-- Footer -->
+<div class="position-relative footer-dark">
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="item text text-center">
+                    <h3>DATGlitches.com</h3>
+                    <p>Your favorite AZ based 'bit-rock' band.</p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col item social">
+                    <a
+                            href="https://www.facebook.com/daphneandtheglitches"
+                            class="fa fa-facebook"
+                            target="_blank"
+                    ></a>
+                    <a
+                            href="https://twitter.com/DATGlitches"
+                            class="fa fa-twitter"
+                            target="_blank"
+                    ></a>
+                    <a
+                            href="https://www.youtube.com/channel/UCLp53DH3S6nrfcTWm5Pk61w"
+                            target="_blank"
+                    ><i class="fa fa-youtube"></i
+                    ></a>
+                    <a href="https://www.instagram.com/datglitches/" target="_blank"
+                    ><i class="fa fa-instagram" src="/images/"></i
+                    ></a>
+                </div>
+            </div>
+            <div class="row justify-content-around">
+                <img class="col align-self-center" id="DATG-Pad" src="/images/DATG_Pad_Large_White.png">
+            </div>
+            <p class="copyright">DATGlitches.com &copy; 2022</p>
+        </div>
+    </footer>
+
+    <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+            crossorigin="anonymous"
+    ></script>
+    <script
+            src="/js/index.js"
+    ></script>
+</body>
+</html>

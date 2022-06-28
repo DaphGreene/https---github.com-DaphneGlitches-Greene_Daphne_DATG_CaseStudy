@@ -1,0 +1,18 @@
+
+@font-face {
+    font-family: 'bisectregular';
+    src: url('./bisect-webfont.woff2') format('woff2'),
+         url('./bisect-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'bisectthe-catchwords';
+    src: url('./bisect-the-catchwords-webfont.woff2') format('woff2'),
+         url('./bisect-the-catchwords-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
